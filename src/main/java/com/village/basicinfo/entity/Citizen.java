@@ -1,5 +1,6 @@
 package com.village.basicinfo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.village.area.dto.AreaDTO;
 import com.village.basicinfo.dto.DesignationDTO;
 
@@ -27,9 +28,11 @@ public class Citizen implements Serializable {
     private String username;
 
     @Transient
+    @JsonIgnore
     private AreaDTO area;
 
     @Transient
+    @JsonIgnore
     private DesignationDTO designation;
 
     public Citizen() {

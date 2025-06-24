@@ -80,6 +80,8 @@ public class CitizenServiceImpl implements CitizenService {
 
     @Override
     public Citizen getCitizenById(Long id) {
+
+
         return citizenRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Citizen not found with id " + id));
     }
@@ -93,6 +95,10 @@ public class CitizenServiceImpl implements CitizenService {
     @Override
     public CitizenDTO getCitizenWithDesignation(Long id) {
         Citizen citizen = getCitizenById(id);
+
+        Area area = areaRepository.findById(citizen.getAreaId())
+                .orElseThrow(() -> new RuntimeException("Area not found with ID: " + citizen.getAreaId()));
+
         DesignationDTO designation = designationClient.getDesignationById(citizen.getDesignationId());
 
         CitizenDTO dto = new CitizenDTO();
@@ -101,7 +107,10 @@ public class CitizenServiceImpl implements CitizenService {
         dto.setAge(citizen.getAge());
         dto.setGender(citizen.getGender());
         dto.setDesignation(designation);
-
+        dto.setArea(new AreaDTO(area.getId(), area.getName(), area.getAbout()));
+        dto.setAreaId(citizen.getAreaId());
+        dto.setUsername(citizen.getUsername());
+        dto.setDesignationId(citizen.getDesignationId());
         return dto;
     }
 
