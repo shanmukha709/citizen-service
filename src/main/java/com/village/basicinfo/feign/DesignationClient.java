@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "citizen-designation", url = "http://localhost:8081") // Change port if needed
+@FeignClient(name = "citizen-designation", url = "https://designation-service-ci54.onrender.com") // Change port if needed
 public interface DesignationClient {
 
     @GetMapping("/designation/{id}")
